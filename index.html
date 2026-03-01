@@ -22,10 +22,7 @@
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }
                     }
                 }
             }
@@ -38,6 +35,35 @@
         body { transition: background-color 0.3s ease; }
         .glass-effect { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
         .dark .glass-effect { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* สไตล์หน้าจอดำ (Overlay) */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 1s ease;
+        }
+        #overlay-text {
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: pulse-text 2s infinite;
+        }
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
         .book-card { transition: all 0.3s ease; transform-origin: center bottom; }
         .book-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
         .avatar-container { position: relative; }
@@ -47,6 +73,10 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
     
+    <div id="overlay">
+        <div id="overlay-text">Click anywhere to enter</div>
+    </div>
+
     <div class="fixed top-4 right-4 z-50">
         <button id="themeToggle" class="p-3 rounded-full glass-effect shadow-lg hover:shadow-xl transition-all">
             <i id="sunIcon" class="fas fa-sun text-yellow-500 hidden"></i>
@@ -81,7 +111,7 @@
                     <h2 class="heading-font text-2xl font-bold mb-4 flex items-center"><i class="fas fa-user-circle mr-3 text-primary-500"></i> About Me</h2>
                     <div class="mb-6"><p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">ลงหนังสือ หนังที่ชอบ</p><p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">computer science kusrc.</p></div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-4 rounded-xl"><div class="flex items-center mb-2"><i class="fas fa-brain text-blue-500 mr-2"></i><h3 class="font-semibold">Personality Type</h3></div><div class="text-2xl font-bold text-blue-700 dark:text-blue-300">???</div></div>
+                        <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 p-4 rounded-xl"><div class="flex items-center mb-2"><i class="fas fa-brain text-blue-500 mr-2"></i><h3 class="font-semibold">Personality Type</h3></div><div class="text-2xl font-bold text-blue-700 dark:text-blue-300">ENTP-T</div></div>
                         <div class="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 p-4 rounded-xl"><div class="flex items-center mb-2"><i class="fas fa-map-marker-alt text-green-500 mr-2"></i><h3 class="font-semibold">Location</h3></div><div class="text-2xl font-bold text-green-700 dark:text-green-300">ชลบุรี</div></div>
                     </div>
                     <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-4 rounded-xl"><h3 class="font-semibold mb-3 flex items-center"><i class="fas fa-envelope text-purple-500 mr-2"></i> Contact</h3><div class="flex flex-col sm:flex-row sm:items-center justify-between"><a href="mailto:phasxnr@gmail.com" class="text-lg font-medium text-purple-700 dark:text-purple-300 hover:text-purple-800 transition-colors">phasxnr@gmail.com</a></div></div>
@@ -97,23 +127,17 @@
                 <div class="rounded-2xl glass-effect p-6 shadow-lg">
                     <h2 class="heading-font text-2xl font-bold mb-6 flex items-center"><i class="fas fa-link mr-3 text-primary-500"></i> Connect With Me</h2>
                     <div class="space-y-4">
-                        <a href="https://www.instagram.com/atchanonr?igsh=MWFoNDhxMXRzYnNlYg%3D%3D&utm_source=qr" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 flex items-center justify-center mr-4">
-                                <i class="fab fa-instagram text-white text-xl"></i>
-                            </div>
-                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Instagram</h3><p class="text-sm text-gray-600 dark:text-gray-400">Follow my stories</p></div>
+                        <a href="#" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 flex items-center justify-center mr-4"><i class="fab fa-instagram text-white text-xl"></i></div>
+                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Instagram</h3></div>
                         </a>
-                        <a href="https://www.facebook.com/share/1CVbnYJ3Dz/?mibextid=wwXIfr" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
-                                <i class="fab fa-facebook-f text-white text-xl"></i>
-                            </div>
-                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Facebook</h3><p class="text-sm text-gray-600 dark:text-gray-400">Let's be friends</p></div>
+                        <a href="#" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mr-4"><i class="fab fa-facebook-f text-white text-xl"></i></div>
+                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Facebook</h3></div>
                         </a>
-                        <a href="https://www.pinterest.com/phasxnr/?invite_code=ed8d5009ccbc498fbd9bd8fd75e72b99&sender=624382073247092687" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
-                            <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mr-4">
-                                <i class="fab fa-pinterest text-white text-xl"></i>
-                            </div>
-                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Pinterest</h3><p class="text-sm text-gray-600 dark:text-gray-400">Inspiration board</p></div>
+                        <a href="#" target="_blank" class="flex items-center p-4 rounded-xl bg-gray-50 dark:bg-gray-800 hover:shadow-md transition-all group">
+                            <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center mr-4"><i class="fab fa-pinterest text-white text-xl"></i></div>
+                            <div><h3 class="font-bold group-hover:text-primary-600 transition-colors">Pinterest</h3></div>
                         </a>
                     </div>
                 </div>
@@ -131,24 +155,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Music Logic (แบบ MP3)
-            const musicToggle = document.getElementById('musicToggle');
+            const overlay = document.getElementById('overlay');
             const bgMusic = document.getElementById('backgroundMusic');
+            const musicToggle = document.getElementById('musicToggle');
             const playIcon = document.getElementById('playIcon');
             const pauseIcon = document.getElementById('pauseIcon');
-            
             bgMusic.volume = 0.5;
 
+            // ระบบ Overlay: คลิกแล้วเข้าเว็บ + เล่นเพลง
+            overlay.addEventListener('click', () => {
+                overlay.style.opacity = '0';
+                setTimeout(() => { overlay.style.display = 'none'; }, 1000);
+                
+                bgMusic.play().then(() => {
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    musicToggle.classList.add('animate-pulse');
+                }).catch(err => console.log("Play blocked"));
+            });
+
+            // Music Button Logic
             musicToggle.addEventListener('click', () => {
                 if (bgMusic.paused) {
-                    bgMusic.play().then(() => {
-                        playIcon.classList.add('hidden');
-                        pauseIcon.classList.remove('hidden');
-                        musicToggle.classList.add('animate-pulse');
-                    }).catch(err => {
-                        console.error("Music Error:", err);
-                        alert("หาไฟล์เพลงไม่เจอครับ! อย่าลืมโหลดไฟล์ music.mp3 มาวางไว้ที่เดียวกับไฟล์ html นะครับ");
-                    });
+                    bgMusic.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    musicToggle.classList.add('animate-pulse');
                 } else {
                     bgMusic.pause();
                     playIcon.classList.remove('hidden');
@@ -157,39 +189,28 @@
                 }
             });
 
-            // 2. Dark Mode
+            // Dark Mode
             const themeToggle = document.getElementById('themeToggle');
             const html = document.documentElement;
-            const updateThemeIcon = () => {
-                const isDark = html.classList.contains('dark');
-                document.getElementById('sunIcon').classList.toggle('hidden', !isDark);
-                document.getElementById('moonIcon').classList.toggle('hidden', isDark);
-            };
-            
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 html.classList.add('dark');
             }
-            updateThemeIcon();
-
             themeToggle.addEventListener('click', () => {
                 html.classList.toggle('dark');
                 localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-                updateThemeIcon();
+                const sun = document.getElementById('sunIcon');
+                const moon = document.getElementById('moonIcon');
+                sun.classList.toggle('hidden', !html.classList.contains('dark'));
+                moon.classList.toggle('hidden', html.classList.contains('dark'));
             });
 
-            // 3. Book Collection
+            // Book System
             const initialBooks = [
                 { title: "Atomic Habits", author: "James Clear", cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655988385i/40121378.jpg", desc: "Build good habits & break bad ones." },
                 { title: "Sapiens", author: "Yuval Noah Harari", cover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1703329310i/23692271.jpg", desc: "A brief history of humankind." }
             ];
             const container = document.getElementById('booksContainer');
-            
-            const createCard = (b) => `
-                <div class="book-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md h-full flex flex-col">
-                    <div class="h-48 overflow-hidden relative"><img src="${b.cover || 'https://via.placeholder.com/300x450'}" class="w-full h-full object-cover transition-transform hover:scale-110 duration-500"></div>
-                    <div class="p-5 flex-1 flex flex-col"><h3 class="font-bold text-lg mb-1 line-clamp-1">${b.title}</h3><p class="text-sm text-primary-600 dark:text-primary-400 mb-3">${b.author}</p><p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 flex-1">${b.desc}</p></div>
-                </div>`;
-            
+            const createCard = (b) => `<div class="book-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md h-full flex flex-col"><div class="h-48 overflow-hidden relative"><img src="${b.cover || 'https://via.placeholder.com/300x450'}" class="w-full h-full object-cover transition-transform hover:scale-110 duration-500"></div><div class="p-5 flex-1 flex flex-col"><h3 class="font-bold text-lg mb-1 line-clamp-1">${b.title}</h3><p class="text-sm text-primary-600 dark:text-primary-400 mb-3">${b.author}</p><p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 flex-1">${b.desc}</p></div></div>`;
             initialBooks.forEach(b => container.innerHTML += createCard(b));
 
             const modal = document.getElementById('addBookModal');
@@ -197,19 +218,11 @@
             const closeModal = () => modal.classList.add('hidden');
             document.getElementById('closeModalBtn').addEventListener('click', closeModal);
             document.getElementById('cancelBookBtn').addEventListener('click', closeModal);
-            
             document.getElementById('bookForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-                container.innerHTML += createCard({
-                    title: document.getElementById('bookTitle').value,
-                    author: document.getElementById('bookAuthor').value,
-                    cover: document.getElementById('bookCover').value,
-                    desc: document.getElementById('bookDescription').value
-                });
-                e.target.reset();
-                closeModal();
+                container.innerHTML += createCard({ title: document.getElementById('bookTitle').value, author: document.getElementById('bookAuthor').value, cover: document.getElementById('bookCover').value, desc: document.getElementById('bookDescription').value });
+                e.target.reset(); closeModal();
             });
-
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
     </script>
